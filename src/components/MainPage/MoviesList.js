@@ -1,12 +1,26 @@
 import React from 'react';
 import Movie from './Movie';
+import themoviedb from "../../api/themoviedb";
 import "./MovieList.css";
 
 class MovieList extends React.Component {
+    state = { movies: [] }
+
+    componentDidMount() {
+        themoviedb
+          .get()
+          .then(resp => {
+            this.setState({ movies: resp.data.results.slice(0, 10) });
+            //console.log(resp.data.results);
+            //console.log(resp.data.results.slice(0, 10))
+          })
+          .catch(err => console.log(err))
+      };
+
     render () {
         return (
             <div className="movie-list">
-                {this.props.movies.map(movie => (
+                {this.state.movies.map(movie => (
                     <Movie 
                     movieInfo = {movie}
                     key = {movie.id}

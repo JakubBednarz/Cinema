@@ -1,30 +1,18 @@
 import React from "react";
-import themoviedb from "../api/themoviedb";
-import MoviesList from "./MoviesList";
+import { BrowserRouter, Route } from "react-router-dom";
+import MoviesList from "./MainPage/MoviesList";
 import Header from "./Header";
+import Reservation from "./ReservationPage/Reservation";
 
 class App extends React.Component {
-    state = { movies: [] }
-
-    componentDidMount() {
-        themoviedb
-          .get()
-          .then(resp => {
-            this.setState({ movies: resp.data.results.slice(0, 10) });
-            //console.log(resp.data.results);
-            //console.log(resp.data.results.slice(0, 10))
-          })
-          .catch(err => console.log(err))
-      };
-
-
     render() {
         return (
             <div>
                 <Header />
-                <MoviesList 
-                    movies={this.state.movies}
-                />
+                <BrowserRouter>
+                    <Route path="/" exact component={MoviesList}></Route>
+                    <Route path="/reservation" component={Reservation}></Route>
+                </BrowserRouter>
             </div>
         );
     };  

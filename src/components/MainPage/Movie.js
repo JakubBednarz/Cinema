@@ -1,5 +1,6 @@
 import React from "react";
 import "./Movie.css"
+import { Link } from "react-router-dom";
 
 class Movie extends React.Component {
     state = { posterUrl: "" }
@@ -21,7 +22,12 @@ class Movie extends React.Component {
                 alt={`Poster of movie: ${this.props.movieInfo.title}`}
                 />
                 <div>
-                    <button>Reserve tickets!</button>
+                    <button>
+                        <Link 
+                        to={`/reservation/${this.props.movieInfo.id}/${this.props.movieInfo.original_title}`}>
+                            Reserve Tickets
+                        </Link>
+                    </button>
                 </div>
             </div>
         )
