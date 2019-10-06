@@ -11,8 +11,6 @@ class MovieList extends React.Component {
           .get()
           .then(resp => {
             this.setState({ movies: resp.data.results.slice(0, 10) });
-            //console.log(resp.data.results);
-            //console.log(resp.data.results.slice(0, 10))
           })
           .catch(err => console.log(err))
       };
